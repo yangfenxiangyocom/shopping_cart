@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 import frappe
+from frappe import _
 from frappe.utils import cint, fmt_money, cstr
 from shopping_cart.shopping_cart.cart import _get_cart_quotation
 from urllib import unquote
@@ -16,7 +17,11 @@ def get_product_info(item_code):
 
 	cart_quotation = _get_cart_quotation()
 
-	price_list = cstr(unquote(frappe.local.request.cookies.get("selling_price_list")))
+	#price_list = cstr(unquote(frappe.local.request.cookies.get("selling_price_list")))
+	#if not price_list:
+	price_list = _('Standard Selling')
+
+
 
 	warehouse = frappe.db.get_value("Item", item_code, "website_warehouse")
 	if warehouse:
@@ -30,6 +35,8 @@ def get_product_info(item_code):
 	price = price_list and frappe.db.sql("""select price_list_rate, currency from
 		`tabItem Price` where item_code=%s and price_list=%s""",
 		(item_code, price_list), as_dict=1) or []
+
+	frappe.log(item_code + price_list)
 
 	price = price and price[0] or None
 	qty = 0
@@ -50,5 +57,6 @@ def get_product_info(item_code):
 		"price": price,
 		"stock": in_stock,
 		"uom": frappe.db.get_value("Item", item_code, "stock_uom"),
-		"qty": qty
+		"qty": qty,
+		"price_list":price_list
 	}

@@ -1,14 +1,14 @@
-{% block title %} {{ title }} {% endblock %}
+{% block title %} {{ _(title) }} {% endblock %}
 
-{% block header %}<h2>{{ title }}</h2>{% endblock %}
+{% block header %}<h2>{{ _(title) }}</h2>{% endblock %}
 
 {% block content %}
 {% macro render_fields(docfields) -%}
 {% for df in docfields -%}
 	{% if df.fieldtype == "Data" -%}
 	<fieldset>
-		<label>{{ df.label }}</label>
-		<input class="form-control" type="text" placeholder="Type {{ df.label }}"
+		<label>{{ _(df.label) }}</label>
+		<input class="form-control" type="text" placeholder="{{ _(df.label) }}"
 			data-fieldname="{{ df.fieldname }}" data-fieldtype="{{ df.fieldtype }}"
 			{% if doc and doc.get(df.fieldname) -%} value="{{ doc[df.fieldname] }}" {%- endif %}>
 	</fieldset>
@@ -17,19 +17,19 @@
 		<label><input type="checkbox" data-fieldname="{{ df.fieldname }}"
 			data-fieldtype="{{ df.fieldtype }}"
 			{% if doc and frappe.utils.cint(doc.get(df.fieldname)) -%} checked="checked" {%- endif %}>
-			{{ df.label }}</label>
+			{{ _(df.label) }}</label>
 	</fieldset>
 	{% elif df.fieldtype in ("Select", "Link") -%}
 	<fieldset>
 		{% set select_options = frappe.get_list(df.options)|map(attribute="name")
 			if df.fieldtype == "Link" else df.options.split("\n") %}
-		<label>{{ df.label }}</label>
+		<label>{{ _(df.label) }}</label>
 		<select class="form-control" data-fieldname="{{ df.fieldname }}" data-fieldtype="{{ df.fieldtype }}">
 			{% for value in select_options -%}
 			{% if doc and doc.get(df.fieldname) == value -%}
-			<option selected="selected">{{ value }}</option>
+			<option value="{{ value }}" selected="selected">{{ _(value)  }}</option>
 			{% else -%}
-			<option>{{ value }}</option>
+			<option value="{{ value }}">{{ _(value) }}</option>
 			{%- endif %}
 			{%- endfor %}
 		</select>
@@ -40,13 +40,13 @@
 
 <div class="container content">
     <ul class="breadcrumb">
-    	<li><a href="index">Home</a></li>
-    	<li><a href="addresses">My Addresses</a></li>
-    	<li class="active"><i class="icon-map-marker icon-fixed-width"></i> {{ title }}</li>
+    	<li><a href="index">{{ _('Home') }}</a></li>
+    	<li><a href="addresses">{{ _('My Addresses') }}</a></li>
+    	<li class="active"><i class="icon-map-marker icon-fixed-width"></i> {{ _(title) }}</li>
     </ul>
-	<h3><i class="icon-map-marker icon-fixed-width"></i> {{ title }}</h3>
+	<h3><i class="icon-map-marker icon-fixed-width"></i> {{ _(title) }}</h3>
 	<button type="button" class="btn btn-primary pull-right" id="address-save"><i class="icon-ok"></i>
-		{{ doc and "Save" or "Insert" }}</button>
+		{{ doc and _("Save") or _("Insert") }}</button>
 	<div class="clearfix"></div>
 	<hr>
 	<div id="address-error" class="alert alert-danger" style="display:none"></div>
@@ -64,8 +64,16 @@
 
 <script>
 ;(function() {
-	console.log("yoyo");
 	frappe.ready(function() {
+
+		//set default country as china
+		$(".form-control").each(function(i,ele){
+			if($(ele).attr('data-fieldname') == 'country')
+			{
+				$(ele).val('China');
+			}
+		});
+
 		bind_save();
 	});
 

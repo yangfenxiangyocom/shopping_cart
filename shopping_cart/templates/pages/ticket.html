@@ -11,8 +11,8 @@
 
 <div class="ticket-content">
     <ul class="breadcrumb">
-    	<li><a href="index">Home</a></li>
-    	<li><a href="tickets">My Tickets</a></li>
+    	<li><a href="index">{{ _("Home") }}</a></li>
+    	<li><a href="tickets">{{ _("My Tickets") }}</a></li>
     	<li class="active"><i class="icon-ticket icon-fixed-width"></i> {{ doc.name or "" }}</li>
     </ul>
 	{% if not doc -%}
@@ -27,7 +27,7 @@
 	{%- endif -%}
 	<div class="row">
 		<div class="col-md-2" style="margin-bottom: 7px;">
-			<span class="label {{ status_label.get(status) or 'label-default' }}">{{ status }}</span>
+			<span class="label {{ status_label.get(status) or 'label-default' }}">{{ _(status) }}</span>
 		</div>
 		<div class="col-md-8">
 			<div class="row col-md-12">{{ doc.subject }}</div>
@@ -37,12 +37,12 @@
 		</div>
 	</div>
 	<div class="row">
-		<h4 class="col-xs-6">Messages</h4>
+		<h4 class="col-xs-6"> {{ _("Messages") }}</h4>
 		<div class="col-xs-6">
-			 <button class="btn btn-sm btn-primary pull-right" id="ticket-reply">
-				  <i class="icon-envelope icon-fixed-width"></i> Reply</button>
+			 <button class="btn btn-sm btn-primary pull-right" id="ticket-reply"> 
+				  <i class="icon-envelope icon-fixed-width"></i> {{ _("Reply") }}</button>
 			 <button class="btn btn-sm btn-success pull-right hide" id="ticket-reply-send">
-				  <i class="icon-arrow-right icon-fixed-width"></i> Send</button>
+				  <i class="icon-arrow-right icon-fixed-width"></i>{{ _("Send") }}</button>
 		</div>
 	</div>
 	<p id="ticket-alert" class="alert alert-danger"
@@ -74,7 +74,7 @@ $(document).ready(function() {
 	$("#ticket-reply").on("click", function() {
 		if(!$("#ticket-reply-editor").length) {
 			$('<tr id="ticket-reply-editor"><td>\
-				<h5 style="text-transform: none">Reply</h5>\
+				<h5 style="text-transform: none">' + '" {{ _("Reply")}}" ' + '</h5>\
 				<hr>\
 				<textarea rows=10 class="form-control" style="resize: vertical;"></textarea>\
 			</td></tr>').prependTo($("#ticket-thread").find("tbody"));

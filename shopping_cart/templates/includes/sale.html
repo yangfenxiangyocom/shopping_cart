@@ -1,6 +1,6 @@
 <div class="sale-content">
     <ul class="breadcrumb">
-    	<li><a href="index">Home</a></li>
+    	<li><a href="index"> {{ _("Home") }}</a></li>
     	<li><a href="{{ parent_link }}">{{ parent_title }}</a></li>
     	<li class="active"><i class="icon-file icon-fixed-width"></i> {{ doc.name }}</li>
     </ul>
@@ -12,7 +12,13 @@
 	<div>
 	<div class="row">
 		<div class="col-xs-6">
-			{% if doc.status -%}{{ doc.status }}{%- endif %}
+			
+			{% if doc.status -%}
+
+				{{ doc.status }}
+
+			{%- endif %}
+
 		</div>
 		<div class="col-xs-6">
 			<span class="pull-right">{{ frappe.utils.formatdate(doc.posting_date or doc.transaction_date) }}</span>
@@ -24,13 +30,13 @@
 		<table class="table table-bordered">
 			<tbody>
 				<tr>
-					<th>Sr</th>
-					<th>Item Name</th>
-					<th>Description</th>
-					<th>Qty</th>
-					<th>UoM</th>
-					<th>Basic Rate</th>
-					<th>Amount</th>
+					<th>{{ _("Sr") }}</th>
+					<th>{{ _("Item Name") }}</th>
+					<th>{{ _("Description") }}</th>
+					<th>{{ _("Qty") }}</th>
+					<th>{{ _("UOM") }}</th>
+					<th>{{ _("Basic Rate") }}</th>
+					<th>{{ _("Amount") }}</th>
 				</tr>
 				{%- for row in doc.get({"doctype": doc.doctype + " Item"}) %}
 				<tr>
@@ -53,7 +59,7 @@
 		<table cellspacing=0 width=100%>
 		<tbody>
 			<tr>
-				<td>Net Total</td>
+				<td>{{ _("Net Total") }}</td>
 				<td width=40% style="text-align: right;">{{
 					frappe.utils.fmt_money(doc.net_total/doc.conversion_rate, currency=doc.currency)
 				}}</td>
@@ -67,11 +73,11 @@
 			{%- endif -%}
 			{%- endfor -%}
 			<tr>
-				<td>Grand Total</td>
+				<td>{{ _("Grand Total") }}</td>
 				<td style="text-align: right;">{{ frappe.utils.fmt_money(doc.grand_total_export, currency=doc.currency) }}</td>
 			</tr>
 			<tr style='font-weight: bold'>
-				<td>Rounded Total</td>
+				<td>{{ _("Rounded Total") }}</td>
 				<td style="text-align: right;">{{ frappe.utils.fmt_money(doc.rounded_total_export, currency=doc.currency) }}</td>
 			</tr>
 		</tbody>

@@ -1,5 +1,5 @@
-{% block title %} {{ title }} {% endblock %}
+{% block title %} {{ _(title) }} {% endblock %}
 
-{% block header %}<h2>{{ title }}</h2>{% endblock %}
+{% block header %}<h2>{{ _(title) }}</h2>{% endblock %}
 
 {% block content %}{% include "templates/includes/sales_transactions.html" %}{% endblock %}

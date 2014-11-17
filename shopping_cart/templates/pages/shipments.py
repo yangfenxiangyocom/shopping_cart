@@ -3,6 +3,7 @@
 
 from __future__ import unicode_literals
 import frappe
+from frappe import _
 from shopping_cart.templates.utils import get_currency_context
 
 no_cache = 1
@@ -11,10 +12,10 @@ no_sitemap = 1
 def get_context(context):
 	shipments_context = get_currency_context()
 	shipments_context.update({
-		"title": "Shipments",
+		"title": _("Shipments"),
 		"method": "shopping_cart.templates.pages.shipments.get_shipments",
 		"icon": "icon-truck",
-		"empty_list_message": "No Shipments Found",
+		"empty_list_message": _("No Shipments Found"),
 		"page": "shipment"
 	})
 	return shipments_context

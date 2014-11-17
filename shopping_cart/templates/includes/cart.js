@@ -6,6 +6,11 @@
 // shopping cart
 frappe.provide("shopping_cart");
 
+//prepare translation fix
+messages_trans = {'Go ahead and add something to your cart.':"选择商品添加进购物车吧",
+				'Empty :-(':"购物车为空的呢"};
+$.extend(frappe._messages, messages_trans);
+
 $.extend(shopping_cart, {
 	show_error: function(title, text) {
 		$("#cart-container").html('<div class="well"><h4>' + title + '</h4> ' + text + '</div>');
@@ -56,7 +61,7 @@ $.extend(shopping_cart, {
 		var no_items = $.map(doc.quotation_details || [],
 			function(d) { return d.item_code || null;}).length===0;
 		if(no_items) {
-			shopping_cart.show_error("Empty :-(", frappe._("Go ahead and add something to your cart."));
+			shopping_cart.show_error(frappe._("Empty :-("), frappe._("Go ahead and add something to your cart."));
 			$("#cart-addresses").toggle(false);
 			return;
 		}
@@ -91,12 +96,12 @@ $.extend(shopping_cart, {
 			$('<hr>').appendTo($cart_taxes);
 
 		shopping_cart.render_tax_row($cart_totals, {
-			description: "<strong>Total</strong>",
+			description: "<strong> {{ _('Total') }} </strong>",
 			formatted_tax_amount: "<strong>" + doc.formatted_grand_total_export + "</strong>"
 		});
 
 		if(!(addresses && addresses.length)) {
-			$cart_shipping_address.html('<div class="well">'+frappe._("Hey! Go ahead and add an address")+'</div>');
+			$cart_shipping_address.html('<div class="well">'+frappe._("{{ _('Hey! Go ahead and add an address') }}")+'</div>');
 		} else {
 			shopping_cart.render_address($cart_shipping_address, addresses, doc.shipping_address_name);
 			shopping_cart.render_address($cart_billing_address, addresses, doc.customer_address);
@@ -129,7 +134,7 @@ $.extend(shopping_cart, {
 							<i class="icon-ok"></i></button>\
 					</div>\
 				</div>\
-				<p style="margin-top: 10px;">at %(formatted_rate)s</p>\
+				<p style="margin-top: 10px;">%(formatted_rate)s / %(stock_uom)s</p>\
 				<small class="text-muted" style="margin-top: 10px;">= %(formatted_amount)s</small>\
 			</div>\
 		</div><hr>', doc)).appendTo($cart_items);

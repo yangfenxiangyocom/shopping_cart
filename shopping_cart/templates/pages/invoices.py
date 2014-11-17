@@ -3,6 +3,7 @@
 
 from __future__ import unicode_literals
 import frappe
+from frappe import _
 from shopping_cart.templates.utils import get_currency_context
 
 no_cache = 1
@@ -11,10 +12,10 @@ no_sitemap = 1
 def get_context(context):
 	invoices_context = get_currency_context()
 	invoices_context.update({
-		"title": "Invoices",
+		"title": _("Invoices"),
 		"method": "shopping_cart.templates.pages.invoices.get_invoices",
 		"icon": "icon-file-text",
-		"empty_list_message": "No Invoices Found",
+		"empty_list_message": _("No Invoices Found"),
 		"page": "invoice"
 	})
 	return invoices_context

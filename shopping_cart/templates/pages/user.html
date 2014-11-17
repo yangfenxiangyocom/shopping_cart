@@ -1,32 +1,32 @@
-{% block title %} {{ "My Profile" }} {% endblock %}
+{% block title %} {{ _("My Profile") }} {% endblock %}
 
-{% block header %}<h2>My Profile</h2>{% endblock %}
+{% block header %}<h2>{{ _("My Profile") }} </h2>{% endblock %}
 
 {% block content %}
 <div class="user-content" style="max-width: 500px;">
     <ul class="breadcrumb">
-    	<li><a href="index">Home</a></li>
-    	<li class="active"><i class="icon-user icon-fixed-width"></i> My Profile</li>
+    	<li><a href="index">{{ _("Home") }}</a></li>
+    	<li class="active"><i class="icon-user icon-fixed-width"></i> {{ _("My Profile") }} </li>
     </ul>
 	<div class="alert alert-warning" id="message" style="display: none;"></div>
 	<form>
 		<fieldset>
-			<label>Full Name</label>
-			<input class="form-control" type="text" id="fullname" placeholder="Your Name">
+			<label>{{ _("Full Name") }} </label>
+			<input class="form-control" type="text" id="fullname" placeholder="{{ _('Full Name') }}">
 		</fieldset>
 		<fieldset>
-			<label>Company Name</label>
-			<input class="form-control" type="text" id="company_name" placeholder="Company Name" value="{{ company_name }}">
+			<label>{{ _("Company Name") }} </label>
+			<input class="form-control" type="text" id="company_name" placeholder="{{ _('Company Name') }}" value="{{ company_name }}">
 		</fieldset>
 		<fieldset>
-			<label>Mobile No</label>
-			<input class="form-control" type="text" id="mobile_no" placeholder="Mobile No" value="{{ mobile_no }}">
+			<label>{{ _("Mobile No") }}</label>
+			<input class="form-control" type="text" id="mobile_no" placeholder="{{ _('Mobile No') }}" value="{{ mobile_no }}">
 		</fieldset>
 		<fieldset>
-			<label>Phone</label>
-			<input class="form-control" type="text" id="phone" placeholder="Phone" value="{{ phone }}">
+			<label>{{ _("Phone") }}</label>
+			<input class="form-control" type="text" id="phone" placeholder="{{ _('Phone') }}" value="{{ phone }}">
 		</fieldset>
-		<button id="update_user" type="submit" class="btn btn-default">Update</button>
+		<button id="update_user" type="submit" class="btn btn-default">{{ _("Update") }}</button>
 	</form>
 </div>
 <script>

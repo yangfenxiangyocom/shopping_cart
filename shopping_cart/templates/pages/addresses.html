@@ -1,12 +1,13 @@
-{% block title %} {{ "My Addresses" }} {% endblock %}
+{% block title %} {{  _("My Addresses") }} {% endblock %}
 
-{% block header %}<h2>My Addresses</h2>{% endblock %}
+{% block header %}<h2>{{  _("My Addresses") }}</h2>{% endblock %}
 
 {% block breadcrumbs %}{% include "templates/includes/breadcrumbs.html" %}{% endblock %}
 
 {% block content %}
 <div class="addresses-content">
-	<p><a class="btn btn-default" href="address"><i class="icon-plus"> New Address</i></a></p>
+	<p><a class="btn btn-default" href="address"><i class="icon-plus">
+	{{ _("New Address") }} </i></a></p>
 	<hr>
 	<div id="address-list">
 		<div class="progress progress-striped active">
@@ -25,7 +26,7 @@
 				var $list = $("#address-list");
 
 				if(!(r.message && r.message.length)) {
-					$list.html("<div class='alert'>No Addresses Found</div>");
+					$list.html("<div class='alert'> {{ _('No Addresses Found') }}</div>");
 					return;
 				}
 

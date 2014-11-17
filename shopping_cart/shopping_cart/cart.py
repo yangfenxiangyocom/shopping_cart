@@ -39,7 +39,7 @@ def place_order():
 	quotation.company = frappe.db.get_value("Shopping Cart Settings", None, "company")
 	for fieldname in ["customer_address", "shipping_address_name"]:
 		if not quotation.get(fieldname):
-			throw(_("{0} is required").format(quotation.meta.get_label(fieldname)))
+			throw(_("{0} is required").format(_(quotation.meta.get_label(fieldname))))
 
 	quotation.ignore_permissions = True
 	quotation.submit()
@@ -291,11 +291,30 @@ def get_address_docs(party=None):
 		where `%s`=%s order by name""" % (party.doctype.lower(), "%s"), party.name,
 		as_dict=True, update={"doctype": "Address"})
 
+
 	for address in address_docs:
 		address.display = get_address_display(address)
 		address.display = (address.display).replace("\n", "<br>\n")
 
+
 	return address_docs
+
+def get_formatted_address(party=None):
+	if not party:
+		party = get_lead_or_customer()
+
+	address_docs = frappe.db.sql("""select * from `tabAddress`
+		where `%s`=%s order by name""" % (party.doctype.lower(), "%s"), party.name,
+		as_dict=True, update={"doctype": "Address"})
+
+	formatted_address = [];
+
+	for address in address_docs:
+		address.display = get_address_display(address)
+		address.display = (address.display).replace("\n", "<br>\n")
+		formatted_address.append({'display':address.display,'name':address.name});
+
+	return formatted_address
 
 @frappe.whitelist()
 def apply_shipping_rule(shipping_rule):

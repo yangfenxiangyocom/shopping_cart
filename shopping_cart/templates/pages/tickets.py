@@ -3,6 +3,7 @@
 
 from __future__ import unicode_literals
 import frappe
+from frappe import _
 from frappe.utils import cint, formatdate
 
 no_cache = 1
@@ -10,10 +11,10 @@ no_sitemap = 1
 
 def get_context(context):
 	return {
-		"title": "My Tickets",
+		"title": _("My Tickets"),
 		"method": "shopping_cart.templates.pages.tickets.get_tickets",
 		"icon": "icon-ticket",
-		"empty_list_message": "No Tickets Raised",
+		"empty_list_message": _("No Tickets Raised"),
 		"page": "ticket"
 	}
 
@@ -25,6 +26,7 @@ def get_tickets(start=0):
 		limit %s, 20""", (frappe.session.user, cint(start)), as_dict=True)
 	for t in tickets:
 		t.creation = formatdate(t.creation)
+		t.status = _(t.status)
 	
 	return tickets
 	

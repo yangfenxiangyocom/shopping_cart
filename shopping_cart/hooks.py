@@ -1,7 +1,8 @@
+# coding=utf-8
 app_name = "shopping_cart"
 app_title = "Shopping Cart"
-app_publisher = "Web Notes Technologies"
-app_description = "Online Shopping Cart integrated with ERPNext"
+app_publisher = "ERP Boost"
+app_description = "直销以及分销下单渠道"
 app_icon = "icon-shopping-cart"
 app_color = "#B7E090"
 app_email = "info@erpnext.com"

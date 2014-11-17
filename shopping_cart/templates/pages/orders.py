@@ -3,6 +3,7 @@
 
 from __future__ import unicode_literals
 import frappe
+from frappe import _
 from shopping_cart.templates.utils import get_currency_context, get_transaction_list
 from shopping_cart.templates.pages.order import modify_status
 
@@ -12,10 +13,10 @@ no_sitemap = 1
 def get_context(context):
 	orders_context = get_currency_context()
 	orders_context.update({
-		"title": "My Orders",
+		"title": _("My Orders"),
 		"method": "shopping_cart.templates.pages.orders.get_orders",
 		"icon": "icon-list",
-		"empty_list_message": "No Orders Yet",
+		"empty_list_message": _("No Orders Yet"),
 		"page": "order",
 	})
 	return orders_context

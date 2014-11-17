@@ -3,11 +3,12 @@
 
 from __future__ import unicode_literals
 import frappe
-from shopping_cart.shopping_cart.cart import get_address_docs
+from shopping_cart.shopping_cart.cart import get_formatted_address
 
 no_cache = 1
 no_sitemap = 1
 
+
 @frappe.whitelist()
 def get_addresses():
-	return get_address_docs()
+	return get_formatted_address()
