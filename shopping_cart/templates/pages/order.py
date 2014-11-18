@@ -12,7 +12,7 @@ no_sitemap = 1
 def get_context(context):
 	order_context = frappe._dict({
 		"parent_link": "orders",
-		"parent_title": "My Orders"
+		"parent_title": _("My Orders")
 	})
 
 	order_context.update(get_transaction_context("Sales Order", frappe.form_dict.name))
@@ -30,5 +30,5 @@ def modify_status(doc):
 		doc.status.append(("label-warning", "icon-truck", _("Partially Delivered")))
 	elif doc.per_delivered == 100:
 		doc.status.append(("label-success", "icon-truck", _("Delivered")))
-	doc.status = " " + " ".join(('<span class="label %s"><i class="icon-fixed-width %s"></i> %s</span>' % s
+	doc.status = '<span class="label label-success"><i class="icon-fixed-width icon-ok"></i>' +  _("Submitted") + '</span> &nbsp' + " ".join(('<span class="label %s"><i class="icon-fixed-width %s"></i> %s</span>' % s
 			for s in doc.status))

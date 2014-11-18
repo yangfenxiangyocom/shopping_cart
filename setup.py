@@ -5,9 +5,9 @@ version = "0.5.0"
 setup(
     name='shopping_cart',
     version=version,
-    description='Online Shopping Cart integrated with ERPNext',
+    description='Online sale/order cart',
     author='Web Notes Technologies',
-    author_email='info@erpnext.com',
+    author_email='support@erpboost.com',
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,

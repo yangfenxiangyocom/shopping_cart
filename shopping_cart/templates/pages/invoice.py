@@ -13,7 +13,7 @@ no_sitemap = 1
 def get_context(context):
 	invoice_context = frappe._dict({
 		"parent_link": "invoices",
-		"parent_title": "Invoices"
+		"parent_title": _("Invoices")
 	})
 	invoice_context.update(get_transaction_context("Sales Invoice", frappe.form_dict.name))
 	modify_status(invoice_context.doc)

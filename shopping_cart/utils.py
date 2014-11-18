@@ -4,6 +4,7 @@
 from __future__ import unicode_literals
 
 import frappe
+from frappe import _
 import frappe.defaults
 from frappe.utils import cint
 
@@ -30,17 +31,17 @@ def update_website_context(context):
 
 	if cart_enabled:
 		post_login += [
-			{"label": "Cart", "url": "cart", "icon": "icon-shopping-cart", "class": "cart-count"},
+			{"label": _("Cart"), "url": "cart", "icon": "icon-shopping-cart", "class": "cart-count"},
 			{"class": "divider"}
 		]
 
 	post_login += [
-		{"label": "User", "url": "user", "icon": "icon-user"},
-		{"label": "Addresses", "url": "addresses", "icon": "icon-map-marker"},
-		{"label": "My Orders", "url": "orders", "icon": "icon-list"},
-		{"label": "My Tickets", "url": "tickets", "icon": "icon-tags"},
-		{"label": "Invoices", "url": "invoices", "icon": "icon-file-text"},
-		{"label": "Shipments", "url": "shipments", "icon": "icon-truck"},
+		{"label": _("User"), "url": "user", "icon": "icon-user"},
+		{"label": _("Addresses"), "url": "addresses", "icon": "icon-map-marker"},
+		{"label": _("My Orders"), "url": "orders", "icon": "icon-list"},
+		{"label": _("My Tickets"), "url": "tickets", "icon": "icon-tags"},
+		{"label": _("Invoices"), "url": "invoices", "icon": "icon-file-text"},
+		{"label": _("Shipments"), "url": "shipments", "icon": "icon-truck"},
 		{"class": "divider"}
 	]
 
